@@ -1,10 +1,20 @@
-package com.minesweeper.minesweeper.dto;
+package com.minesweeper.minesweeper.entity;
 
 public class Cell {
     private boolean mine;
-    private int number;
+    private int number; // Number of adjacent mines
     private boolean revealed;
     private boolean flagged;
+    private int x;
+    private int y;
+
+    public Cell(int x, int y) { // 생성자에 좌표 추가
+        this.x = x;
+        this.y = y;
+        this.mine = false;
+        this.revealed = false;
+        this.flagged = false;
+    }
 
     public Cell() {
         this.mine = false;
@@ -14,6 +24,22 @@ public class Cell {
 
     public boolean isMine() {
         return mine;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     public void setMine(boolean mine) {
@@ -54,4 +80,3 @@ public class Cell {
         }
     }
 }
-

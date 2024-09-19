@@ -9,13 +9,18 @@
     <table id="board">
         <tr th:each="row : ${board}">
             <td th:each="cell : ${row}"
-                th:id="${cell.id}"
+                th:id="'cell-' + ${cell.x} + '-' + ${cell.y}"
+                th:classappend="${cell.revealed} ? 'revealed' : ''"
+                th:data-number="${cell.number}"
                 th:onclick="'reveal(' + ${cell.x} + ',' + ${cell.y} + ')'"
                 th:oncontextmenu="'flag(' + ${cell.x} + ',' + ${cell.y} + '); return false;'"
                 th:text="${cell.display}">
             </td>
         </tr>
     </table>
+    <div id="remaining-mines">
+        남은 지뢰: <span id="mine-count" th:text="${remainingMines}"></span>
+    </div>
 </div>
 <script th:src="@{/js/minesweeper.js}"></script>
 </body>

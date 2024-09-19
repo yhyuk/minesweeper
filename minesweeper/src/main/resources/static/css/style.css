@@ -1,0 +1,64 @@
+body {
+    background-color: #808080; /* 전체 배경을 그레이로 설정 */
+    font-family: Arial, sans-serif;
+}
+
+#game-board {
+    margin: auto;
+    width: 50%;
+    padding: 20px;
+    background-color: #a9a9a9;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#board {
+    border-collapse: collapse;
+}
+
+#board td {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #696969;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: #dcdcdc;
+    transition: all 0.2s ease; /* 부드러운 전환 효과 */
+}
+
+#board td.revealed {
+    background-color: #b0c4de; /* 셀이 공개된 경우 약간 더 어두운 색상 */
+    box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.5); /* 클릭 시 그림자 */
+}
+
+#board td.mine {
+    background-color: #ff6347; /* 지뢰는 빨간색 */
+}
+
+#board td.flag {
+    background-color: #4682b4; /* 깃발은 파란색 */
+}
+
+#board td[data-number="1"] {
+    color: green; /* 1이면 초록색 */
+}
+
+#board td[data-number="2"] {
+    color: blue; /* 2이면 파란색 */
+}
+
+#board td[data-number="3"] {
+    color: red; /* 3이면 빨간색 */
+}
+
+#board td[data-number="4"] {
+    color: purple; /* 4이면 보라색 */
+}
+
+#remaining-mines {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 20px;
+    color: white;
+}
