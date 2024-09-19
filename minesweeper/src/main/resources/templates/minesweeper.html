@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>MineSweeper</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div id="game-board">
+    <table id="board">
+        <tr th:each="row : ${board}">
+            <td th:each="cell : ${row}"
+                th:id="${cell.id}"
+                th:onclick="'reveal(' + ${cell.x} + ',' + ${cell.y} + ')'"
+                th:oncontextmenu="'flag(' + ${cell.x} + ',' + ${cell.y} + '); return false;'"
+                th:text="${cell.display}">
+            </td>
+        </tr>
+    </table>
+</div>
+<script th:src="@{/js/minesweeper.js}"></script>
+</body>
+</html>
