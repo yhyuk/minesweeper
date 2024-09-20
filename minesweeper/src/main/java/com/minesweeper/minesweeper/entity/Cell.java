@@ -74,7 +74,7 @@ public class Cell {
         if (flagged) {
             return "🚩";
         } else if (revealed) {
-            return mine ? "💣" : Integer.toString(number);
+            return mine ? "💣" : number > 0 ? Integer.toString(number) : "";
         } else {
             return "";
         }
