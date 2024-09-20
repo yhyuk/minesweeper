@@ -14,6 +14,7 @@ public class Board {
         this.height = height;
         this.mineCount = mineCount;
         this.board = new Cell[width][height];
+        this.remainingMines = mineCount;
         initializeBoard();
     }
 

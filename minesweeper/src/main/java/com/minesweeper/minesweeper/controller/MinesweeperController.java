@@ -22,8 +22,10 @@ public class MinesweeperController {
     @GetMapping("/minesweeper")
     public String showGameBoard(Model model, @RequestParam(defaultValue = "beginner") String level) {
         Board board = minesweeperService.initializeBoard(level);
+
+        System.out.println("남은 지뢰 개수 : " + board.getRemainingMines());
         model.addAttribute("board", board.getBoard());
-        model.addAttribute("remainingMines", minesweeperService.getRemainingMines()); // 남은 지뢰 수 추가
+        model.addAttribute("remainingMines", board.getRemainingMines()); // 남은 지뢰 수 추가
         return "minesweeper";
     }
 
