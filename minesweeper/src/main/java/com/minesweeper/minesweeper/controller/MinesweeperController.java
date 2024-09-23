@@ -1,7 +1,7 @@
 package com.minesweeper.minesweeper.controller;
 
-import com.minesweeper.minesweeper.entity.Board;
-import com.minesweeper.minesweeper.entity.Cell;
+import com.minesweeper.minesweeper.dto.Board;
+import com.minesweeper.minesweeper.dto.Cell;
 import com.minesweeper.minesweeper.service.MinesweeperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,15 +17,12 @@ public class MinesweeperController {
     @Autowired
     private MinesweeperService minesweeperService;
 
-
-
     @GetMapping("/minesweeper")
     public String showGameBoard(Model model, @RequestParam(defaultValue = "beginner") String level) {
         Board board = minesweeperService.initializeBoard(level);
 
-        System.out.println("남은 지뢰 개수 : " + board.getRemainingMines());
-        model.addAttribute("board", board.getBoard());
-        model.addAttribute("remainingMines", board.getRemainingMines()); // 남은 지뢰 수 추가
+        model.addAttribute("board", board.board());
+        model.addAttribute("remainingMines", board.remainingMines()); // 남은 지뢰 수 추가
         return "minesweeper";
     }
 

@@ -1,4 +1,4 @@
-package com.minesweeper.minesweeper.entity;
+package com.minesweeper.minesweeper.dto;
 
 public class Cell {
     private boolean mine;

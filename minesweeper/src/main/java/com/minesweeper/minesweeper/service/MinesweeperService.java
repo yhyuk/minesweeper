@@ -1,12 +1,13 @@
 package com.minesweeper.minesweeper.service;
 
-import com.minesweeper.minesweeper.entity.Board;
-import com.minesweeper.minesweeper.entity.Cell;
+import com.minesweeper.minesweeper.dto.Board;
+import com.minesweeper.minesweeper.dto.Cell;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MinesweeperService {
 
+    private int remainingMines;
     private Board board;
 
     public Board initializeBoard(String level) {
@@ -31,20 +32,22 @@ public class MinesweeperService {
         }
 
         this.board = new Board(width, height, mineCount);
+        this.remainingMines = board.mineCount();
         return this.board;
     }
 
     public Cell[][] revealCell(int x, int y) {
         if (board == null) {
-            throw new IllegalStateException("Board not initialized");
+            throw new IllegalStateException("지뢰찾기 초기화 실패");
         }
         board.reveal(x, y);
-        return board.getBoard();  // 이 부분에서 board 전체가 아닌 Cell 배열을 반환
+
+        return board.board();  // 이 부분에서 board 전체가 아닌 Cell 배열을 반환
     }
 
     public Cell[][] toggleFlag(int x, int y) {
         if (board == null) {
-            throw new IllegalStateException("Board not initialized");
+            throw new IllegalStateException("지뢰찾기 초기화 실패");
         }
         Cell cell = board.getCell(x, y);
         if (!cell.isRevealed()) {
@@ -53,18 +56,27 @@ public class MinesweeperService {
 
             if (cell.isMine()) {
                 if (!wasFlagged && cell.isFlagged()) {
-                    board.decrementRemainingMines(); // 올바른 위치에 깃발을 꽂았을 때 지뢰 개수 감소
+                    decrementRemainingMines(); // 올바른 위치에 깃발을 꽂았을 때 지뢰 개수 감소
                 } else if (wasFlagged && !cell.isFlagged()) {
-                    board.incrementRemainingMines(); // 깃발을 다시 제거하면 지뢰 개수 증가
+                    incrementRemainingMines(); // 깃발을 다시 제거하면 지뢰 개수 증가
                 }
             }
         }
 
-        return board.getBoard();
+        return board.board();
+    }
+
+    private void decrementRemainingMines() {
+        remainingMines--;
+    }
+
+    private void incrementRemainingMines() {
+        remainingMines++;
     }
 
     public int getRemainingMines() {
-        return board.getRemainingMines();
+        return remainingMines;
     }
+
 
 }
